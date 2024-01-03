@@ -2,10 +2,13 @@
 	import Leaflet from 'components/Leaflet.svelte';
 	import Marker from 'components/Marker.svelte';
 
-	import { faStar } from '@fortawesome/free-solid-svg-icons';
-	import type { LatLngExpression } from 'leaflet';
+	export let data;
+	const { locations } = data;
 
-	const initialView: LatLngExpression = [40.7026493, -73.991899]; // Dortmund, Germany
+	import { faFlag } from '@fortawesome/free-solid-svg-icons';
+	import { type LatLngExpression } from 'leaflet';
+
+	const initialView: LatLngExpression = [40.7026493, -73.991899]; // Dumbo
 	const markerLocations: LatLngExpression[] = [
 		[40.703482365922476, -73.9922595930682], // Timeout Market
 		[40.702834743794526, -73.98934790024559] // Ecogy
@@ -13,9 +16,16 @@
 </script>
 
 <div class="h-screen w-full">
-	<Leaflet view={initialView} zoom={14}>
-		{#each markerLocations as latLng}
-			<Marker {latLng} icon={faStar} class=" bg-green-600"></Marker>
+	<Leaflet view={initialView} zoom={12}>
+		{#each locations as { address, coords }}
+			{#if coords}
+				<Marker
+					latLng={coords}
+					icon={faFlag}
+					class="bg-green-600"
+					query={address ?? coords.join(',')}
+				/>
+			{/if}
 		{/each}
 	</Leaflet>
 </div>

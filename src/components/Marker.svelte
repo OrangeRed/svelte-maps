@@ -7,6 +7,8 @@
 
 	export let latLng: L.LatLngExpression;
 	export let icon: IconDefinition;
+	export let query: string;
+	query = query.replaceAll(', ', ' ').replaceAll(' ', '+');
 
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
@@ -44,7 +46,7 @@
 		'flex h-full w-full items-center justify-center rounded-full border-2 p-3 shadow-sm shadow-black',
 		$$restProps.class || ''
 	)}
-	href="https://maps.app.goo.gl/5YDcALRt1MRFewjUA"
+	href={`https://www.google.com/maps/search/?api=1&query=${query}`}
 	target="_blank"
 >
 	{#if marker}
