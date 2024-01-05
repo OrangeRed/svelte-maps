@@ -19,12 +19,9 @@
 	<Leaflet view={initialView} zoom={12}>
 		{#each locations as { address, coords }}
 			{#if coords}
-				<Marker
-					latLng={coords}
-					icon={faFlag}
-					class="bg-green-600"
-					query={address ?? coords.join(',')}
-				/>
+				<Marker latLng={coords} class="bg-green-600" query={address ?? coords.join(',')}>
+					<i class="{faFlag.prefix} fa-{faFlag.iconName} text-white" />
+				</Marker>
 			{/if}
 		{/each}
 	</Leaflet>

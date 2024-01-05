@@ -3,10 +3,7 @@
 	import { cn } from '$lib/utils';
 	import L from 'leaflet';
 
-	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-
 	export let latLng: L.LatLngExpression;
-	export let icon: IconDefinition;
 	export let query: string;
 	query = query.replaceAll(', ', ' ').replaceAll(' ', '+');
 
@@ -46,11 +43,10 @@
 		'flex h-full w-full items-center justify-center rounded-full border-2 p-3 shadow-sm shadow-black',
 		$$restProps.class || ''
 	)}
-	href={`https://www.google.com/maps/search/?api=1&query=${query}`}
+	href="https://www.google.com/maps/search/?api=1&query={query}"
 	target="_blank"
 >
 	{#if marker}
-		<i class={cn('text-white', `${icon.prefix} fa-${icon.iconName}`)} />
 		<slot />
 	{/if}
 </a>
